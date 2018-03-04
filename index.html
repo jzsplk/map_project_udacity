@@ -35,11 +35,17 @@
 
 		<!-- Main content -->
 		<main class="main" role="main">
-			<div class='liveExample'>   
-			    <p>First name: <input data-bind='value: firstName' /></p> 
-			    <p>Last name: <input data-bind='value: lastName' /></p> 
-			    <h2>Hello, <span data-bind='text: fullName'> </span>!</h2>  
-			</div>
+			<input class="form-control" data-bind="value: Query, valueUpdate: 'keyup'" autocomplete="off">
+
+			<h3>Search results:</h3>
+			<ul data-bind="foreach: searchResults">
+			  <li data-bind="text: Name"></li>
+			</ul>
+
+			<h3>All items:</h3>
+			<ul data-bind="foreach: items">
+			  <li data-bind="text: Name"></li>
+			</ul>
 		</main>
 
 		

@@ -1,12 +1,14 @@
-// Here's my data model
-var ViewModel = function(first, last) {
-    this.firstName = ko.observable(first);
-    this.lastName = ko.observable(last);
- 
-    this.fullName = ko.computed(function() {
-        // Knockout tracks dependencies automatically. It knows that fullName depends on firstName and lastName, because these get called when evaluating fullName.
-        return this.firstName() + " " + this.lastName();
-    }, this);
+var viewModel = {
+  items: [ { Name: "Apple part" }, { Name: "Apple sauce" }, { Name: "Apple juice" }, { Name: "Pear juice" }, { Name: "Pear mush" }, { Name: "Something different" } ]
 };
- 
-ko.applyBindings(new ViewModel("Planet", "Earth")); // This makes Knockout get to work
+
+viewModel.Query = ko.observable('');
+
+viewModel.searchResults = ko.computed(function() {
+    var q = viewModel.Query();
+    return viewModel.items.filter(function(i) {
+      return i.Name.toLowerCase().indexOf(q) >= 0;
+    });
+});
+
+ko.applyBindings(viewModel);

@@ -31,23 +31,30 @@
 		<![endif]-->
 
 		<!-- Header -->
-		<header class="header">XC 's project</header>
+		<header class="header"></header>
 
 		<!-- Main content -->
 		<main class="main" role="main">
-			<input class="form-control" data-bind="value: Query, valueUpdate: 'keyup'" autocomplete="off">
+			<div class="filter">
+				<input class="form-control" data-bind="value: Query, valueUpdate: 'keyup'" autocomplete="off">
 
-			<h3>Search results:</h3>
-			<ul data-bind="foreach: searchResults">
-			  <li data-bind="text: Name"></li>
-			</ul>
+				<h3>Search results:</h3>
+				<ul data-bind="foreach: searchResults">
+				  <li data-bind="text: Name"></li>
+				</ul>
 
-			<h3>All items:</h3>
-			<ul data-bind="foreach: items">
-			  <li data-bind="text: Name"></li>
-			</ul>
+				<h3>All items:</h3>
+				<ul data-bind="foreach: items">
+				  <li data-bind="text: Name"></li>
+				</ul>
+			</div>
+
+			<div id="map" class="map"></div>
+		    <script async defer
+		        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSolJNNS0caRgyCNlCiXaWiYUt39AYsko&v=3&callback=initMap">
+		    </script>
 		</main>
-
+		
 		
 		<!-- Footer -->
 		<footer class="footer"></footer>
@@ -56,4 +63,5 @@
 	<!-- Include scripts -->
 	<script src="bower_components/knockout/dist/knockout.js"></script>
 	<script src="js/app.js"></script>
+	<script src="js/map.js"></script>
 </html>

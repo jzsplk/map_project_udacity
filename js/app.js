@@ -12,3 +12,4 @@ viewModel.searchResults = ko.computed(function() {
 });
 
 ko.applyBindings(viewModel);
+

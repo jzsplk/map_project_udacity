@@ -1,5 +1,5 @@
 var viewModel = {
-  items: [ { Name: "Apple part" }, { Name: "Apple sauce" }, { Name: "Apple juice" }, { Name: "Pear juice" }, { Name: "Pear mush" }, { Name: "Something different" } ]
+  items: [ { Name: "Park Ave Penthouse" }, { Name: "Chelsea Loft" }, { Name: "Union Square Open Floor Plan" }, { Name: "East Village Hip Studio" }, { Name: "TriBeCa Artsy Bachelor Pad" }, { Name: "Chinatown Homey Space" } ]
 };
 
 viewModel.Query = ko.observable('');

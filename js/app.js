@@ -13,3 +13,15 @@ viewModel.searchResults = ko.computed(function() {
 
 ko.applyBindings(viewModel);
 
+//menu controll
+var menu = document.querySelector('#menu');
+var map = document.querySelector('.map');
+var drawer = document.querySelector('.filter');
+
+menu.addEventListener('click', function(e) {
+drawer.classList.toggle('open');
+e.stopPropagation();
+});
+map.addEventListener('click', function() {
+drawer.classList.remove('open');
+});

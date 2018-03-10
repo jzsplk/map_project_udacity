@@ -53,6 +53,11 @@ main {
 
 }
 
+.filter li:hover {
+	background-color: #fff;
+	color: #000;
+}
+
 .map {
 /*	position: absolute;
 	left: 170px;
@@ -96,7 +101,7 @@ main {
   }
   .results {
   	font-size: 1.5rem;
-  	font-weight: 1000rem;
+  	font-weight: bold;
   	padding-left: 10px;
   }
   .header__menu {

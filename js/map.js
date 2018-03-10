@@ -83,4 +83,20 @@ function initMap() {
 
     showListings();
     document.getElementById('search').addEventListener('keyup', showListings);
+
+    //toogleBounce的功能
+    // toggleBounce(1);
+}
+
+function toggleBounce(id) {
+	for(var i = 0; i < markers.length; i++) {
+		if(id === markers[i].id) {
+			if(markers[i].getAnimation() !== null) {
+				markers[i].setAnimation(null);
+			} else {
+				markers[i].setAnimation(google.maps.Animation.BOUNCE);
+			}
+			
+		}
+	}
 }

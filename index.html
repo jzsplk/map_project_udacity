@@ -47,7 +47,7 @@
 
 				<h3 class="results">Search results:</h3>
 				<ul data-bind="foreach: searchResults">
-				  <li class="filter__item" data-bind="text: Name, click: toggleBounce(Id)"></li>
+				  <li class="filter__item" data-bind="text: Name, click: function() {toggleBounce(Id)}, attr: {id: 'myprefix_' + $index() }"></li>
 				</ul>
 			</div>
 

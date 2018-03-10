@@ -5,10 +5,15 @@ var viewModel = {
 viewModel.Query = ko.observable('');
 
 viewModel.searchResults = ko.computed(function() {
-    var q = viewModel.Query();
-    return viewModel.items.filter(function(i) {
-      return i.Name.toLowerCase().indexOf(q) >= 0;
-    });
+    var q = viewModel.Query().toLowerCase();
+    if(!q) {
+    	return viewModel.items;
+    } else {
+    	    return viewModel.items.filter(function(i) {
+		      return i.Name.toLowerCase().indexOf(q) != -1;
+		    });
+    }
+
 });
 
 ko.applyBindings(viewModel);

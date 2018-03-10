@@ -3,7 +3,7 @@ var map;
 
 // Create a new blank array for all the listing markers.
 var markers = [];
-
+var largeInfowindow;
 function initMap() {
 	// Constructor creates a new map - only center and zoom are required.
 	map = new google.maps.Map(document.getElementById('map'), {
@@ -22,7 +22,7 @@ function initMap() {
       {title: 'Chinatown Homey Space', location: {lat: 40.7180628, lng: -73.9961237}}
     ];
 
-    var largeInfowindow = new google.maps.InfoWindow();
+    largeInfowindow = new google.maps.InfoWindow();
     var bounds = new google.maps.LatLngBounds(); 
     
     // The following group uses the location array to create an array of markers on initialize.
@@ -83,11 +83,9 @@ function initMap() {
 
     showListings();
     document.getElementById('search').addEventListener('keyup', showListings);
-
-    //toogleBounce的功能
-    // toggleBounce(1);
 }
 
+//toogleBounce的功能,启动动画效果
 function toggleBounce(id) {
 	for(var i = 0; i < markers.length; i++) {
 		if(id === markers[i].id) {
@@ -95,8 +93,23 @@ function toggleBounce(id) {
 				markers[i].setAnimation(null);
 			} else {
 				markers[i].setAnimation(google.maps.Animation.BOUNCE);
+				populateInfoWindow(markers[i], largeInfowindow);
 			}
 			
 		}
 	}
+}
+
+//showWindows
+function populateInfoWindow(marker, infowindow) {
+  // Check to make sure the infowindow is not already opened on this marker.
+  if (infowindow.marker != marker) {
+    infowindow.marker = marker;
+    infowindow.setContent('<div>' + marker.title + '</div>');
+    infowindow.open(map, marker);
+    // Make sure the marker property is cleared if the infowindow is closed.
+    infowindow.addListener('closeclick',function(){
+      infowindow.setMarker = null;
+    });
+  }
 }

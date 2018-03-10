@@ -47,7 +47,7 @@
 
 				<h3 class="results">Search results:</h3>
 				<ul data-bind="foreach: searchResults">
-				  <li class="filter__item" data-bind="text: Name, attr: { id: $index() }, click: toggleBounce(Id)"></li>
+				  <li class="filter__item" data-bind="text: Name, click: toggleBounce(Id)"></li>
 				</ul>
 			</div>
 
@@ -61,10 +61,11 @@
 	</body>
 	
 	<!-- Include scripts -->
-	<script src="bower_components/knockout/dist/knockout.js"></script>
-	<script src="js/map.js"></script>
-	<script src="js/app.js"></script>
     <script async defer
 	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSolJNNS0caRgyCNlCiXaWiYUt39AYsko&v=3&callback=initMap">
 	</script>
+	<script src="bower_components/knockout/dist/knockout.js"></script>
+	<script src="js/map.js"></script>
+	<script src="js/app.js"></script>
+
 </html>

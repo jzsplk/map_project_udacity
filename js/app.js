@@ -26,37 +26,4 @@ map.addEventListener('click', function() {
 	drawer.classList.remove('open');
 });
 
-//list toggle bounce
-var list0 = document.getElementById('foo0');
-var list1 = document.getElementById('foo1');
-var list2 = document.getElementById('foo2');
-var list3 = document.getElementById('foo3');
-var list4 = document.getElementById('foo4');
-var list5 = document.getElementById('foo5');
 
-function addBounceListener() {
-	list0.addEventListener('click', function() {
-		toggleBounce(0);
-	});
-
-	list1.addEventListener('click', function() {
-		toggleBounce(1);
-	});
-
-	list2.addEventListener('click', function() {
-		toggleBounce(2);
-	});
-
-	list3.addEventListener('click', function() {
-		toggleBounce(3);
-	});
-
-	list4.addEventListener('click', function() {
-		toggleBounce(4);
-	});
-
-	list5.addEventListener('click', function() {
-		toggleBounce(5);
-	});
-
-}

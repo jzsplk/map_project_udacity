@@ -41,10 +41,8 @@
 
 		<!-- Main content -->
 		<main class="main" role="main">
-
+			<input id="search" class="form-control" placeholder="Seatch for place" data-bind="value: Query, valueUpdate: 'keyup'" autocomplete="off">
 			<div class="filter">
-				<input id="search" class="form-control" data-bind="value: Query, valueUpdate: 'keyup'" autocomplete="off">
-
 				<h3 class="results">Search results:</h3>
 				<ul data-bind="foreach: searchResults">
 				  <li class="filter__item" data-bind="text: Name, click: function() {toggleBounce(Id)}, attr: {id: 'myprefix_' + $index() }"></li>

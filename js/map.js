@@ -66,7 +66,7 @@ function initMap() {
     // This function will loop through the markers array and display them all.
     function showListings() {
       var bounds = new google.maps.LatLngBounds();
-      var mapSearchResults = viewModel.searchResults().map(function(e) {
+      var mapSearchResults = myViewModel.searchResults().map(function(e) {
       	return e.Name.toLowerCase();
       });
       // Extend the boundaries of the map for each marker and display the marker
@@ -119,16 +119,3 @@ function populateInfoWindow(marker, infowindow) {
   }
 }
 
-//toggleInfoWindow
-function toggleInfoWindow(marker, infowindow) {
-  // Check to make sure the infowindow is not already opened on this marker.
-  if (infowindow.marker != marker) {
-    infowindow.marker = marker;
-    infowindow.setContent('<div>' + marker.title + '</div>');
-    infowindow.open(map, marker);
-    // Make sure the marker property is cleared if the infowindow is closed.
-    infowindow.addListener('closeclick',function(){
-      infowindow.setMarker = null;
-    });
-  }
-}

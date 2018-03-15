@@ -4,30 +4,19 @@ var map;
 // Create a new blank array for all the listing markers. create the Infowindow
 var markers = [];
 var largeInfowindow;
-
 function initMap() {
+	console.log('maps-API has been loaded, ready to use');
 	// Constructor creates a new map - only center and zoom are required.
 	map = new google.maps.Map(document.getElementById('map'), {
 	  center: {lat: 40.7413549, lng: -73.9980244},
 	  zoom: 13
 	});
 
-    // These are the real estate listings that will be shown to the user.
-    // Normally we'd have these in a database instead.
-    var locations = [
-      {title: 'Park Ave Penthouse', location: {lat: 40.7713024, lng: -73.9632393}},
-      {title: 'Chelsea Loft', location: {lat: 40.7444883, lng: -73.9949465}},
-      {title: 'Union Square Open Floor Plan', location: {lat: 40.7347062, lng: -73.9895759}},
-      {title: 'East Village Hip Studio', location: {lat: 40.7281777, lng: -73.984377}},
-      {title: 'TriBeCa Artsy Bachelor Pad', location: {lat: 40.7195264, lng: -74.0089934}},
-      {title: 'Chinatown Homey Space', location: {lat: 40.7180628, lng: -73.9961237}}
-    ];
-
     largeInfowindow = new google.maps.InfoWindow();
     var bounds = new google.maps.LatLngBounds(); 
     
     // The following group uses the location array to create an array of markers on initialize.
-    for (var i = 0; i < locations.length; i++) {
+    for (var i = 2; i < locations.length; i++) {
       // Get the position from the location array.
       var position = locations[i].location;
       var title = locations[i].title;
@@ -67,7 +56,7 @@ function initMap() {
     function showListings() {
       var bounds = new google.maps.LatLngBounds();
       var mapSearchResults = myViewModel.searchResults().map(function(e) {
-      	return e.Name.toLowerCase();
+      	return e.title.toLowerCase();
       });
       // Extend the boundaries of the map for each marker and display the marker
       for (var i = 0; i < markers.length; i++) {
@@ -84,12 +73,13 @@ function initMap() {
 
     showListings();
     document.getElementById('search').addEventListener('keyup', showListings);
-}
 
+
+};
 
 //toogleBounce的功能,切换marker的动画效果
 function toggleBounce(id) {
-	for(var i = 0; i < markers.length; i++) {
+	for(var i = 2; i < markers.length; i++) {
 		if(id == markers[i].id) {
 			if(markers[i].getAnimation() !== null) {
 				markers[i].setAnimation(null);
@@ -119,3 +109,13 @@ function populateInfoWindow(marker, infowindow) {
   }
 }
 
+//function to add marker to place
+function addMarker(geo) {
+	geo.marker = new google.maps.Marker({
+        position: geo.loc,
+        title: geo.title,
+        animation: google.maps.Animation.DROP,
+        id: geo.Id
+      });
+}
+	

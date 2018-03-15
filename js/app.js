@@ -161,16 +161,18 @@ function viewModel() {
     // This function will loop through the markers array and display them all.
     self.showMarker = function() {
       var bounds = new google.maps.LatLngBounds();
-      var mapSearchResults = myViewModel.searchResults().map(function(e) {
-      	return e.title.toLowerCase();
-      });
+ 	  var q = self.Query().toLowerCase();
+
       // Extend the boundaries of the map for each marker and display the marker
-      for (var i = 0; i < markers.length; i++) {
-      	if(mapSearchResults.indexOf(markers[i].title.toLowerCase()) >= 0) {
-	        markers[i].setMap(map);
+      for (var i = 0; i < self.places.length; i++) {
+      	var placeTitle = self.places[i].title.toLowerCase();
+      	var placeCategory = self.places[i].category.toLowerCase();
+      	if(placeTitle.indexOf(q) > -1 || placeCategory.indexOf(q) > -1) {
+
+	        self.places[i].marker().setMap(map);
         	bounds.extend(markers[i].position);
       	} else {
-      		markers[i].setMap(null);
+      		self.places[i].marker().setMap(null);
       	}
       }
       map.fitBounds(bounds);
@@ -250,11 +252,14 @@ function viewModel() {
 			pl.formattedPhone = res.response.venues[0].contact.formattedPhone ? res.response.venues[0].contact.formattedPhone : 'N/A';
 			pl.infoContent += `<div>FourSquare: category: ${pl.category}/ phone: ${pl.formattedPhone}</div>`;
 			pl.id = res.response.venues[0].id;
+			pl.title += res.response.venues[0].categories[0].name;
+
 		};
 
 		//fetch to get request to api
 		fetch(requestURL).then(response => response.json()).then(pl.addData).catch(function(e) {pl.infoContent+=`${e}`});
 
+		
 		//make a marker from the location
 		marker = new google.maps.Marker({
 	        position: pl.loc,

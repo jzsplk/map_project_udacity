@@ -128,18 +128,21 @@ var locations = [
 function viewModel() {
 	var self = this;
 
-	self.places = [];
+	self.places = ko.observableArray([]);
 	self.Query = ko.observable('');
   	self.searchResults = ko.computed(function() {
 	    var q = self.Query().toLowerCase();
-	    if(!q) {
-	    	return self.places;
-	    } else {
-	    	    return self.places.filter(function(i) {
+	    // if(q == null) {
+	    // 	console.log(self.places());
+	    // 	return self.places();
+	    // } else {
+	    // 	    return self.places().filter(function(i) {
+			  //     return i.title.toLowerCase().indexOf(q) != -1;
+			  //   });
+	    // }
+	    return self.places().filter(function(i) {
 			      return i.title.toLowerCase().indexOf(q) != -1;
 			    });
-	    }
-
 	});
 	console.log(self.searchResults());
 
@@ -154,7 +157,7 @@ function viewModel() {
 	//create places with locations data.
 	self.createPlaces = function() {
 		locations.forEach(function(loc) {
-			self.places.push(new Place(loc));
+			self.places().push(new Place(loc));
 		});
 	};
 
@@ -164,20 +167,40 @@ function viewModel() {
  	  var q = self.Query().toLowerCase();
 
       // Extend the boundaries of the map for each marker and display the marker
-      for (var i = 0; i < self.places.length; i++) {
-      	var placeTitle = self.places[i].title.toLowerCase();
-      	var placeCategory = self.places[i].category.toLowerCase();
+      for (var i = 0; i < self.places().length; i++) {
+      	var placeTitle = self.places()[i].title.toLowerCase();
+      	var placeCategory = self.places()[i].category.toLowerCase();
       	if(placeTitle.indexOf(q) > -1 || placeCategory.indexOf(q) > -1) {
 
-	        self.places[i].marker().setMap(map);
+	        self.places()[i].marker().setMap(map);
         	bounds.extend(markers[i].position);
       	} else {
-      		self.places[i].marker().setMap(null);
+      		self.places()[i].marker().setMap(null);
       	}
       }
       map.fitBounds(bounds);
-    }
+    };
 
+    //creatlisenter 
+
+    //markerclick function
+    self.markerClick = function(place) {
+    	if(place.marker().getAnimation() !== null) {
+    		place.marker().setAnimation(null);
+    		largeInfowindow.close();
+    	} else {
+    		place.marker().setAnimation(google.maps.Animation.BOUNCE);
+    		self.populateInfoWindow(place.marker(), largeInfowindow);
+    	}
+    };
+
+    self.addMarkerLiscener = function() {
+    	self.places().forEach(function(place) {
+    		place.marker().addListener('click', function() {
+    			self.markerClick(place);
+    		});
+		});
+    };
 	//toogleBounce的功能,切换marker的动画效果
 	self.toggleBounce =function(id) {
 		for(var i = 0; i < markers.length; i++) {
@@ -194,14 +217,14 @@ function viewModel() {
 				markers[i].setAnimation(null);
 			}
 		}
-	}
+	};
 
 	//populateInfoWindow
 	self.populateInfoWindow = function(marker, infowindow) {
 	  // Check to make sure the infowindow is not already opened on this marker.
 	  if (infowindow.marker != marker) {
 	    infowindow.marker = marker;
-	    infowindow.setContent('<div>' + myViewModel.places[marker.id].title + ' '+ myViewModel.places[marker.id].infoContent + '</div>');
+	    infowindow.setContent('<div>' + myViewModel.places()[marker.id].title + ' '+ myViewModel.places[marker.id].infoContent + '</div>');
 	    infowindow.open(map, marker);
 	    // Make sure the marker property is cleared if the infowindow is closed.
 	    infowindow.addListener('closeclick',function(){
@@ -216,10 +239,11 @@ function viewModel() {
     	var bounds = new google.maps.LatLngBounds(); 
     	self.initMap();
     	self.createPlaces();
-		console.log(self.places);
-		console.log(markers);
+		console.log(self.places());
 		self.showMarker();
+    	self.addMarkerLiscener();
     	document.getElementById('search').addEventListener('keyup', self.showMarker);
+
 	};
 
 	googleError = function() {
@@ -270,9 +294,7 @@ function viewModel() {
 
 		markers.push(marker);
         // Create an onclick event to open an infowindow at each marker.
-        marker.addListener('click', function() {
-	        populateInfoWindow(this, largeInfowindow);
-	    });
+        // marker.addListener('click', self.markerClick(pl));
 		pl.marker = ko.observable(marker);
 	};
 

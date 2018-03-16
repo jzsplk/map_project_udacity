@@ -88,6 +88,11 @@ main {
     right: 0;
 }
 
+
+.header__menu {
+    display: none;
+ }
+
 /*response*/
 @media screen and (max-width: 549px) {
   .filter {

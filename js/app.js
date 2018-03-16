@@ -113,12 +113,17 @@ function populateInfoWindow(marker, infowindow) {
 // These are the real estate listings that will be shown to the user.
 // Normally we'd have these in a database instead.
 var locations = [
-  {title: '流塘阳光', location: {lat: 22.5838528, lng: 113.8870562}, Id: 0},
+  {title: '流塘阳光', location: {lat: 22.581396, lng: 113.889256}, Id: 0},
   {title: '中粮锦云', location: {lat: 22.584436, lng: 113.886998}, Id: 1},
   {title: '西城丰和家园', location: {lat: 22.585969597476446, lng: 113.87833871100531}, Id: 2},
-  {title: '雍和园', location: {lat: 22.587564, lng: 113.8844623}, Id: 3},
+  {title: '雍和园', location: {lat: 22.587446, lng: 113.886689}, Id: 3},
   {title: '泰华明珠', location: {lat: 22.581921, lng: 113.8829523}, Id: 4},
-  {title: '金海华府', location: {lat: 22.582552, lng: 113.8928995}, Id: 5}
+  {title: '金海华府', location: {lat: 22.582552, lng: 113.8928995}, Id: 5},
+  {title: '中熙 香槟山花园', location: {lat: 22.594685, lng: 113.882703}, Id: 6},
+  {title: '地铁12号线 流塘站', location: {lat: 22.583520, lng: 113.889244}, Id: 7},
+  {title: '地铁12号线 上川站', location: {lat: 22.575976, lng: 113.897464}, Id: 8},
+  {title: '地铁12号线 宝安客运中心站', location: {lat: 22.5902229, lng: 113.8835803}, Id: 9},
+  {title: '凤凰天誉', location: {lat: 22.595899, lng: 113.878355}, Id: 10}
 ];
 
 

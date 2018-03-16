@@ -90,7 +90,7 @@ function populateInfoWindow(marker, infowindow) {
   // Check to make sure the infowindow is not already opened on this marker.
   if (infowindow.marker != marker) {
     infowindow.marker = marker;
-    infowindow.setContent('<div>' + myViewModel.places[marker.id].title + ' '+ myViewModel.places[marker.id].infoContent + '</div>');
+    infowindow.setContent('<div>' + myViewModel.places()[marker.id].title + ' '+ myViewModel.places()[marker.id].infoContent + '</div>');
     infowindow.open(map, marker);
     // Make sure the marker property is cleared if the infowindow is closed.
     infowindow.addListener('closeclick',function(){
@@ -129,21 +129,23 @@ function viewModel() {
 	var self = this;
 
 	self.places = ko.observableArray([]);
-	self.Query = ko.observable('');
-  	self.searchResults = ko.computed(function() {
-	    var q = self.Query().toLowerCase();
-	    // if(q == null) {
-	    // 	console.log(self.places());
-	    // 	return self.places();
-	    // } else {
-	    // 	    return self.places().filter(function(i) {
-			  //     return i.title.toLowerCase().indexOf(q) != -1;
+	self.filteredPlaces = ko.observableArray([]);
+	
+  	self.searchResults = ko.pureComputed(function() {
+	    var query = self.Query().toLowerCase();
+	    if(!self.Query() && (self.places().length === 0) ) {
+	    	return locations;
+	    } else {
+	    	return ko.utils.arrayFilter(self.places(), function(place) {
+	    		return place.title.toLowerCase().indexOf(query) != -1;
+	    	});
+	    }
+	    // return self.places().filter(function(i) {
+			  //     return i.title.toLowerCase().indexOf(query) != -1;
 			  //   });
-	    // }
-	    return self.places().filter(function(i) {
-			      return i.title.toLowerCase().indexOf(q) != -1;
-			    });
-	});
+	});	
+  	self.Query = ko.observable('');
+
 	console.log(self.searchResults());
 
 	//init map
@@ -224,7 +226,7 @@ function viewModel() {
 	  // Check to make sure the infowindow is not already opened on this marker.
 	  if (infowindow.marker != marker) {
 	    infowindow.marker = marker;
-	    infowindow.setContent('<div>' + myViewModel.places()[marker.id].title + ' '+ myViewModel.places[marker.id].infoContent + '</div>');
+	    infowindow.setContent('<div>' + myViewModel.places()[marker.id].title + ' '+ myViewModel.places()[marker.id].infoContent + '</div>');
 	    infowindow.open(map, marker);
 	    // Make sure the marker property is cleared if the infowindow is closed.
 	    infowindow.addListener('closeclick',function(){
@@ -243,7 +245,6 @@ function viewModel() {
 		self.showMarker();
     	self.addMarkerLiscener();
     	document.getElementById('search').addEventListener('keyup', self.showMarker);
-
 	};
 
 	googleError = function() {

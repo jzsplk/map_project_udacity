@@ -41,7 +41,7 @@
 
 		<!-- Main content -->
 		<main class="main" role="main">
-			<input id="search" class="form-control" placeholder="Seatch for place" data-bind="value: Query, valueUpdate: 'keyup'" autocomplete="off">
+			<input id="search" class="form-control" placeholder="Seatch for place" data-bind="textInput: Query">
 
 			<div class="filter">
 				<h3 class="results">Search results:</h3>
@@ -58,13 +58,12 @@
 		<!-- Footer -->
 		<footer class="footer"></footer>
 
-		<!-- Include scripts -->
-		<script src="bower_components/knockout/dist/knockout.js"></script>
-<!-- 		<script src="js/map.js"></script> -->
-		<script src="js/app.js"></script>
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSolJNNS0caRgyCNlCiXaWiYUt39AYsko&v=3&sensor=false&callback=googleLoad" onerror=googleError();></script>	
+
 	</body>
-	
+	<!-- Include scripts -->
+	<script src="bower_components/knockout/dist/knockout.js"></script>
+	<script src="js/app.js"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSolJNNS0caRgyCNlCiXaWiYUt39AYsko&v=3&sensor=false&callback=googleLoad" onerror=googleError();></script>		
 
 
 

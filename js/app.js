@@ -113,18 +113,35 @@ function populateInfoWindow(marker, infowindow) {
 // These are the real estate listings that will be shown to the user.
 // Normally we'd have these in a database instead.
 var locations = [
-  {title: '流塘阳光', location: {lat: 22.581396, lng: 113.889256}, Id: 0},
-  {title: '中粮锦云', location: {lat: 22.584436, lng: 113.886998}, Id: 1},
-  {title: '西城丰和家园', location: {lat: 22.585969597476446, lng: 113.87833871100531}, Id: 2},
-  {title: '雍和园', location: {lat: 22.587446, lng: 113.886689}, Id: 3},
-  {title: '泰华明珠', location: {lat: 22.581921, lng: 113.8829523}, Id: 4},
-  {title: '金海华府', location: {lat: 22.582552, lng: 113.8928995}, Id: 5},
-  {title: '中熙 香槟山花园', location: {lat: 22.594685, lng: 113.882703}, Id: 6},
-  {title: '地铁12号线 流塘站', location: {lat: 22.583520, lng: 113.889244}, Id: 7},
-  {title: '地铁12号线 上川站', location: {lat: 22.575976, lng: 113.897464}, Id: 8},
-  {title: '地铁12号线 宝安客运中心站', location: {lat: 22.5902229, lng: 113.8835803}, Id: 9},
-  {title: '凤凰天誉', location: {lat: 22.595899, lng: 113.878355}, Id: 10}
+  {title: '流塘阳光', location: {lat: 22.581396, lng: 113.889256}, Id: 0, type: 'house'},
+  {title: '中粮锦云', location: {lat: 22.584436, lng: 113.886998}, Id: 1, type: 'house'},
+  {title: '西城丰和家园', location: {lat: 22.585969597476446, lng: 113.87833871100531}, Id: 2, type: 'house'},
+  {title: '雍和园', location: {lat: 22.587446, lng: 113.886689}, Id: 3, type: 'house'},
+  {title: '泰华明珠', location: {lat: 22.581921, lng: 113.8829523}, Id: 4, type: 'house'},
+  {title: '金海华府', location: {lat: 22.582552, lng: 113.8928995}, Id: 5, type: 'coffee'},
+  {title: '中熙 香槟山花园', location: {lat: 22.594685, lng: 113.882703}, Id: 6, type: 'house'},
+  {title: '地铁12号线 流塘站', location: {lat: 22.583520, lng: 113.889244}, Id: 7, type: 'subway'},
+  {title: '地铁12号线 上川站', location: {lat: 22.575976, lng: 113.897464}, Id: 8, type: 'subway'},
+  {title: '地铁12号线 宝安客运中心站', location: {lat: 22.5902229, lng: 113.8835803}, Id: 9, type: 'subway'},
+  {title: '凤凰天誉', location: {lat: 22.595899, lng: 113.878355}, Id: 10, type: 'newhouse'}
 ];
+
+//自定义icon
+var iconBase = 'http://maps.google.com/mapfiles/kml/';
+var icons = {
+  house: {
+    icon: iconBase + 'pal3/icon56.png'
+  },
+  newhouse: {
+    icon: iconBase + 'pal3/icon21.png'
+  },  
+  subway: {
+    icon: iconBase + 'pal5/icon15.png'
+  },
+  coffee: {
+    icon: iconBase + 'pal2/icon62.png'
+  }
+};
 
 
 
@@ -263,6 +280,7 @@ function viewModel() {
 
 		this.title = data.title;
 		this.loc = data.location;
+		this.type = data.type;
 		this.Id = data.Id;
 		this.category = '';
 		this.formattedPhone = '';
@@ -295,7 +313,8 @@ function viewModel() {
 	        position: pl.loc,
 	        title: pl.title,
 	        animation: google.maps.Animation.DROP,
-	        id: pl.Id
+	        id: pl.Id,
+	        icon: icons[pl.type].icon
 	      });
 
 		markers.push(marker);

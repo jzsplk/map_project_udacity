@@ -275,6 +275,7 @@ function viewModel() {
 
 	//Place model
 	var Place = function(data) {
+		//save this of Place as pl
 		var pl = this;
 		var marker;
 
@@ -296,16 +297,20 @@ function viewModel() {
 		//function to add api content to data
 		this.addData = function(res) {
 			console.log(res.response.venues[0]);
-			pl.category = res.response.venues[0].categories ? res.response.venues[0].categories[0].name : 'N/A';
-			pl.formattedPhone = res.response.venues[0].contact.formattedPhone ? res.response.venues[0].contact.formattedPhone : 'N/A';
-			pl.infoContent += `<div>FourSquare: category: ${pl.category}/ phone: ${pl.formattedPhone}</div>`;
-			pl.id = res.response.venues[0].id;
-			pl.title += res.response.venues[0].categories[0].name;
+			if(!res.response.venues[0]) {
+				pl.infoContent += `<div>FourSquare: No data from FourSquare</div>`;
+			} else {
+				pl.category = res.response.venues[0].categories.length === 1 ? res.response.venues[0].categories[0].name : 'N/A';
+				pl.formattedPhone = res.response.venues[0].contact.formattedPhone ? res.response.venues[0].contact.formattedPhone : 'N/A';
+				pl.infoContent += `<div>FourSquare: category: ${pl.category}/ phone: ${pl.formattedPhone}</div>`;
+				pl.id = res.response.venues[0].id;
+				pl.title += res.response.venues[0].categories.length === 1 ? ` (${res.response.venues[0].categories[0].shortName})` : ` (no category from FourSquare)`;
+			}
 
 		};
 
 		//fetch to get request to api
-		fetch(requestURL).then(response => response.json()).then(pl.addData).catch(function(e) {pl.infoContent+=`${e}`});
+		fetch(requestURL).then(response => response.json()).then(pl.addData).catch(function(e) {pl.infoContent+=`error: ${e}`});
 
 		
 		//make a marker from the location

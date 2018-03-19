@@ -5,68 +5,6 @@ var map;
 var markers = [];
 var largeInfowindow;
 
-// function initMap() {
-// 	// Constructor creates a new map - only center and zoom are required.
-// 	map = new google.maps.Map(document.getElementById('map'), {
-// 	  center: {lat: 22.5838528, lng: 113.8870562},
-// 	  zoom: 13
-// 	});
-
-//     largeInfowindow = new google.maps.InfoWindow();
-//     var bounds = new google.maps.LatLngBounds(); 
-
-// //     var marker1 = new google.maps.Marker({
-// // 	position: locations[0].location,
-// // 	title: locations[0].title,
-// // 	animation: google.maps.Animation.DROP
-// // });
-    
-//     // The following group uses the location array to create an array of markers on initialize.
-//     for (var i = 0; i < myViewModel.places.length; i++) {
-//       // Get the position from the location array.
-//       var position = myViewModel.places[i].loc;
-//       var title = myViewModel.places[i].title;
-//       var id = myViewModel.places[i].id;
-//       console.log(myViewModel.places[i]);
-//       // Create a marker per location, and put into markers array.
-//       var marker = new google.maps.Marker({
-//         position: position,
-//         title: title,
-//         animation: google.maps.Animation.DROP,
-//         id: i
-//       });
-//       console.log(marker.id);
-//       // Push the marker to our array of markers.
-//       markers.push(marker);
-//       // Create an onclick event to open an infowindow at each marker.
-//       marker.addListener('click', function() {
-//         populateInfoWindow(this, largeInfowindow);
-//       });
-
-//     };
-
-//     // This function will loop through the markers array and display them all.
-//     function showListings() {
-//       var bounds = new google.maps.LatLngBounds();
-//       var mapSearchResults = myViewModel.searchResults().map(function(e) {
-//       	return e.title.toLowerCase();
-//       });
-//       // Extend the boundaries of the map for each marker and display the marker
-//       for (var i = 0; i < markers.length; i++) {
-//       	if(mapSearchResults.indexOf(markers[i].title.toLowerCase()) >= 0) {
-// 	        markers[i].setMap(map);
-//         	bounds.extend(markers[i].position);
-//       	} else {
-//       		markers[i].setMap(null);
-//       	}
-//       }
-//       map.fitBounds(bounds);
-//     }
-
-//     showListings();
-//     document.getElementById('search').addEventListener('keyup', showListings);
-// };
-
 //toogleBounce的功能,切换marker的动画效果
 function toggleBounce(id) {
 	for(var i = 0; i < markers.length; i++) {
@@ -85,7 +23,7 @@ function toggleBounce(id) {
 	}
 }
 
-//populateInfoWindow
+//弹出信息框函数，populateInfoWindow
 function populateInfoWindow(marker, infowindow) {
   // Check to make sure the infowindow is not already opened on this marker.
   if (infowindow.marker != marker) {

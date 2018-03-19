@@ -48,22 +48,22 @@ main {
 }
 
 .filter {
+  background:  linear-gradient(to bottom, #3a404d, #181c26);
+  color: #fff;
 	font-size: 0.5rem;
 	position:absolute;
 	left:0px;
 	top:50px;
 	display: inline-block;
-	background:  linear-gradient(to bottom, #3a404d, #181c26);
-	color: #fff;
-	z-index: 999;
+	z-index: 99;
 	height: 100%;
-	width: 280px;
-    line-height: 35px;
-    padding: 10px 10px 30px 10px;
-    text-align: left;
-    margin: 0;
-    overflow: hidden;
-    overflow-y:scroll;
+	width: 283px;
+  line-height: 35px;
+  padding: 0px 0px 30px 0px;
+  text-align: left;
+  margin: 0; 
+  overflow: hidden;
+  overflow-y:scroll;
 }
 
 .filter li:hover {
@@ -72,8 +72,16 @@ main {
 }
 
 .filter .results {
+  border: 0;
+  margin: 0;
+  width: 280px;
 	font-weight: bold;
-	font-size: 30px;
+	font-size: 1.5rem;
+  background: #1bb;
+}
+
+.filter .result_list {
+  margin-left: 10px;
 }
 
 .map {

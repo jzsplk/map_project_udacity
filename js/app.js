@@ -37,16 +37,6 @@ function populateInfoWindow(marker, infowindow) {
   }
 }
 
-// //function to add marker to place
-// function addMarker(geo) {
-// 	geo.marker = new google.maps.Marker({
-//         position: geo.loc,
-//         title: geo.title,
-//         animation: google.maps.Animation.DROP,
-//         id: geo.Id
-//       });
-// }
-
 
 // These are the real estate listings that will be shown to the user.
 // Normally we'd have these in a database instead.
@@ -64,7 +54,7 @@ var locations = [
   {title: '凤凰天誉', location: {lat: 22.595899, lng: 113.878355}, Id: 10, type: 'newhouse'}
 ];
 
-//自定义icon
+//自定义icon for google map
 var iconBase = 'http://maps.google.com/mapfiles/kml/';
 var icons = {
   house: {
@@ -81,15 +71,13 @@ var icons = {
   }
 };
 
-
-
-
-
+//viewModel for the app
 function viewModel() {
 	var self = this;
 
+	//places为经过fetch网络数据的地点data，searchResults为搜索筛选之后的data
 	self.places = ko.observableArray([]);
-	self.filteredPlaces = ko.observableArray([]);
+	// self.filteredPlaces = ko.observableArray([]);
 	
   	self.searchResults = ko.pureComputed(function() {
 	    var query = self.Query().toLowerCase();
@@ -100,15 +88,13 @@ function viewModel() {
 	    		return place.title.toLowerCase().indexOf(query) != -1;
 	    	});
 	    }
-	    // return self.places().filter(function(i) {
-			  //     return i.title.toLowerCase().indexOf(query) != -1;
-			  //   });
 	});	
+	//搜索关键词
   	self.Query = ko.observable('');
 
-	console.log(self.searchResults());
+	// console.log(self.searchResults());
 
-	//init map
+	//init map 初始化googlemap函数
 	self.initMap = function() {
 		map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: 22.5838528, lng: 113.8870562},
@@ -116,7 +102,7 @@ function viewModel() {
 		});
 	};
 
-	//create places with locations data.
+	//create places with locations data.从locations建立places的函数
 	self.createPlaces = function() {
 		locations.forEach(function(loc) {
 			self.places().push(new Place(loc));
@@ -124,6 +110,7 @@ function viewModel() {
 	};
 
     // This function will loop through the markers array and display them all.
+    //根据搜索内容来选择显示符合的marker
     self.showMarker = function() {
       var bounds = new google.maps.LatLngBounds();
  	  var q = self.Query().toLowerCase();
@@ -133,7 +120,6 @@ function viewModel() {
       	var placeTitle = self.places()[i].title.toLowerCase();
       	var placeCategory = self.places()[i].category.toLowerCase();
       	if(placeTitle.indexOf(q) > -1 || placeCategory.indexOf(q) > -1) {
-
 	        self.places()[i].marker().setMap(map);
         	bounds.extend(markers[i].position);
       	} else {
@@ -143,9 +129,7 @@ function viewModel() {
       map.fitBounds(bounds);
     };
 
-    //creatlisenter 
-
-    //markerclick function
+    //markerclick function，点击marker出发动画以及弹出窗口的函数，点击toggle效果
     self.markerClick = function(place) {
     	if(place.marker().getAnimation() !== null) {
     		place.marker().setAnimation(null);
@@ -156,6 +140,7 @@ function viewModel() {
     	}
     };
 
+    //把点击marker的函数添加到marker上
     self.addMarkerLiscener = function() {
     	self.places().forEach(function(place) {
     		place.marker().addListener('click', function() {
@@ -163,7 +148,8 @@ function viewModel() {
     		});
 		});
     };
-	//toogleBounce的功能,切换marker的动画效果
+
+	//（暂时未使用）toogleBounce的功能,切换marker的动画效果，目前实际使用的是全局定义的toggleBounce函数
 	self.toggleBounce =function(id) {
 		for(var i = 0; i < markers.length; i++) {
 			if(id == markers[i].id) {
@@ -181,7 +167,7 @@ function viewModel() {
 		}
 	};
 
-	//populateInfoWindow
+	//（未实际使用）populateInfoWindow
 	self.populateInfoWindow = function(marker, infowindow) {
 	  // Check to make sure the infowindow is not already opened on this marker.
 	  if (infowindow.marker != marker) {
@@ -193,15 +179,14 @@ function viewModel() {
 	      infowindow.setMarker = null;
 	    });
 	  }
-	}
+	};
 
-	//google load function,every function using Google api
+	//google load function,every function using Google api,之前出现google map undefined 现象，目前采用这种方式解决
 	googleLoad = function() {
 		largeInfowindow = new google.maps.InfoWindow();
     	var bounds = new google.maps.LatLngBounds(); 
     	self.initMap();
     	self.createPlaces();
-		console.log(self.places());
 		self.showMarker();
     	self.addMarkerLiscener();
     	document.getElementById('search').addEventListener('keyup', self.showMarker);
@@ -211,7 +196,7 @@ function viewModel() {
 		console.log('error loading Google Maps. Please check you interenent connenction.');
 	};
 
-	//Place model
+	//Place model ，地点的类
 	var Place = function(data) {
 		//save this of Place as pl
 		var pl = this;
@@ -248,7 +233,7 @@ function viewModel() {
 		};
 
 		//fetch to get request to api
-		fetch(requestURL).then(response => response.json()).then(pl.addData).catch(function(e) {pl.infoContent+=`error: ${e}`});
+		fetch(requestURL).then(response => response.json()).then(pl.addData).catch(function(e) {pl.infoContent+=`FourSquare Fetch error: ${e}`});
 
 		
 		//make a marker from the location

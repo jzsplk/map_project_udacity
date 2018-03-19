@@ -25,16 +25,23 @@ function toggleBounce(id) {
 
 //弹出信息框函数，populateInfoWindow
 function populateInfoWindow(marker, infowindow) {
-  // Check to make sure the infowindow is not already opened on this marker.
-  if (infowindow.marker != marker) {
-    infowindow.marker = marker;
-    infowindow.setContent('<div>' + myViewModel.places()[marker.id].title + ' '+ myViewModel.places()[marker.id].infoContent + '</div>');
-    infowindow.open(map, marker);
-    // Make sure the marker property is cleared if the infowindow is closed.
-    infowindow.addListener('closeclick',function(){
-      infowindow.setMarker = null;
-    });
-  }
+  	// Check to make sure the infowindow is not already opened on this marker.
+  	if (infowindow.marker != marker) {
+    	infowindow.marker = marker;
+    	infowindow.setContent('<div>' + myViewModel.places()[marker.id].title + ' '+ myViewModel.places()[marker.id].infoContent + '</div>');
+    	infowindow.open(map, marker);
+    	// Make sure the marker property is cleared if the infowindow is closed.
+    	infowindow.addListener('closeclick',function(){
+      		infowindow.setMarker = null;
+    	});
+  	} else {
+  	    infowindow.setContent('<div>' + myViewModel.places()[marker.id].title + ' '+ myViewModel.places()[marker.id].infoContent + '</div>');
+    	infowindow.open(map, marker);
+    	// Make sure the marker property is cleared if the infowindow is closed.
+    	infowindow.addListener('closeclick',function(){
+      		infowindow.setMarker = null;
+    	});
+  	}
 }
 
 
@@ -136,7 +143,7 @@ function viewModel() {
     		largeInfowindow.close();
     	} else {
     		place.marker().setAnimation(google.maps.Animation.BOUNCE);
-    		self.populateInfoWindow(place.marker(), largeInfowindow);
+    		populateInfoWindow(place.marker(), largeInfowindow);
     	}
     };
 

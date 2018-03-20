@@ -52,23 +52,23 @@ function populateInfoWindow(marker, infowindow) {
 // These are the real estate listings that will be shown to the user.
 // Normally we'd have these in a database instead.
 var locations = [
-  {title: '流塘阳光', location: {lat: 22.581396, lng: 113.889256}, Id: 0, type: 'house'},
-  {title: '中粮锦云', location: {lat: 22.584436, lng: 113.886998}, Id: 1, type: 'house'},
-  {title: '西城丰和家园', location: {lat: 22.585969597476446, lng: 113.87833871100531}, Id: 2, type: 'house'},
-  {title: '雍和园', location: {lat: 22.587446, lng: 113.886689}, Id: 3, type: 'house'},
-  {title: '泰华明珠', location: {lat: 22.581921, lng: 113.8829523}, Id: 4, type: 'house'},
-  {title: '金海华府', location: {lat: 22.582552, lng: 113.8928995}, Id: 5, type: 'coffee'},
-  {title: '中熙 香槟山花园', location: {lat: 22.594685, lng: 113.882703}, Id: 6, type: 'house'},
-  {title: '地铁12号线 流塘站', location: {lat: 22.583520, lng: 113.889244}, Id: 7, type: 'subway'},
-  {title: '地铁12号线 上川站', location: {lat: 22.575976, lng: 113.897464}, Id: 8, type: 'subway'},
-  {title: '地铁12号线 宝安客运中心站', location: {lat: 22.5902229, lng: 113.8835803}, Id: 9, type: 'subway'},
-  {title: '凤凰天誉', location: {lat: 22.595899, lng: 113.878355}, Id: 10, type: 'newhouse'},
-  {title: '龍景軒-香港 Lung King Heen', location: {lat: 22.286636, lng: 114.156623}, Id: 11, type: 'coffee'},
-  {title: '志魂-香港 Sushi Shikon', location: {lat: 22.285092, lng: 114.152089}, Id: 12, type: 'coffee'},
-  {title: '唐閣-香港 Tang Court', location: {lat: 22.296392, lng: 114.169746}, Id: 13, type: 'coffee'},
+  {title: '深圳 流塘阳光', location: {lat: 22.581396, lng: 113.889256}, Id: 0, type: 'house'},
+  {title: '深圳 中粮锦云', location: {lat: 22.584436, lng: 113.886998}, Id: 1, type: 'house'},
+  {title: '深圳 西城丰和家园', location: {lat: 22.585969597476446, lng: 113.87833871100531}, Id: 2, type: 'house'},
+  {title: '深圳 雍和园', location: {lat: 22.587446, lng: 113.886689}, Id: 3, type: 'house'},
+  {title: '深圳 泰华明珠', location: {lat: 22.581921, lng: 113.8829523}, Id: 4, type: 'house'},
+  {title: '深圳 金海华府', location: {lat: 22.582552, lng: 113.8928995}, Id: 5, type: 'coffee'},
+  {title: '深圳 中熙 香槟山花园', location: {lat: 22.594685, lng: 113.882703}, Id: 6, type: 'house'},
+  {title: '深圳 地铁12号线 流塘站', location: {lat: 22.583520, lng: 113.889244}, Id: 7, type: 'subway'},
+  {title: '深圳 地铁12号线 上川站', location: {lat: 22.575976, lng: 113.897464}, Id: 8, type: 'subway'},
+  {title: '深圳 地铁12号线 宝安客运中心站', location: {lat: 22.5902229, lng: 113.8835803}, Id: 9, type: 'subway'},
+  {title: '深圳 凤凰天誉', location: {lat: 22.595899, lng: 113.878355}, Id: 10, type: 'newhouse'},
+  {title: '龍景軒-香港 Lung King Heen', location: {lat: 22.286636, lng: 114.156623}, Id: 11, type: 'chinese'},
+  {title: '志魂-香港 Sushi Shikon', location: {lat: 22.285092, lng: 114.152089}, Id: 12, type: 'sushi'},
+  {title: '唐閣-香港 Tang Court', location: {lat: 22.296392, lng: 114.169746}, Id: 13, type: 'chinese'},
   {title: '廚魔-香港-2 Bo Innovation', location: {lat: 22.276227, lng: 114.171086}, Id: 14, type: 'coffee'},
-  {title: '香港 LAtelier de Joël Robuchon', location: {lat: 22.2816084286963, lng: 114.157826442636}, Id: 15, type: 'coffee'},
-  {title: '香港 8 1/2 Otto e Mezzo BOMBANA', location: {lat: 22.281508, lng: 114.158365}, Id: 16, type: 'coffee'},
+  {title: '香港 LAtelier de Joël Robuchon', location: {lat: 22.2816084286963, lng: 114.157826442636}, Id: 15, type: 'french'},
+  {title: '香港 8 1/2 Otto e Mezzo BOMBANA', location: {lat: 22.281508, lng: 114.158365}, Id: 16, type: 'italian'},
 ];
 
 //自定义icon for google map
@@ -85,7 +85,19 @@ var icons = {
   },
   coffee: {
     icon: iconBase + 'pal2/icon62.png'
-  }
+  },
+  french: {
+    icon: iconBase + 'pal2/icon32.png'
+  }, 
+  italian: {
+    icon: iconBase + 'pal2/icon63.png'
+  },  
+  chinese: {
+    icon: iconBase + 'pal2/icon27.png'
+  },
+  sushi: {
+    icon: iconBase + 'pal3/icon29.png'
+  },    
 };
 
 //viewModel for the app

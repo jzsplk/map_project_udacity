@@ -106,12 +106,8 @@ main {
     width: 150px;
 }
 
+/****** google map windows*******/
 .map {
-/*	position: absolute;
-	left: 170px;
-	display: inline-block;
-	width:80%;
-	height:100%;*/
 	  position: absolute;
     bottom:0;
     height: 100%;

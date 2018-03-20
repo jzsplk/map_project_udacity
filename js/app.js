@@ -301,11 +301,12 @@ function viewModel() {
 				pl.yelpUrl = res.url;
 				pl.phoneNum = res.display_phone;
 				pl.price = res.price;
+				pl.rating = res.rating;
 				pl.is_closed = res.is_closed;
 				pl.status = pl.is_closed ? '商家休息' : '营业中';
 				pl.infoContent += `<div id="yelpContent">
 									<h3 id="placeName">${res.name}</h3>
-									<img src=""></img>
+									<img src="img/small_${pl.rating}.png"></img>
 									<span>(${pl.reviewCount})</span>
 									<img id="yelp-img" src=${pl.img}>
 									<p class="phone"><a href="tel: +${pl.phoneNum}">联系 ${pl.phoneNum}</a></p>

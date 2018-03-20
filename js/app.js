@@ -250,9 +250,16 @@ function viewModel() {
 		//url to get request from foursquare data
 		var requestURL = `https://api.foursquare.com/v2/venues/search?ll=${this.loc.lat},${this.loc.lng}&client_id=${clientId}&client_secret=${clientSecret}&v=20170801&query=${this.title}`;
 
+
+		
 		//function to add api content to data
 		this.addFourSquareData = function(res) {
 			console.log(res.response.venues[0]);
+			pl.category = res.response.venues[0].categories.length === 1 ? res.response.venues[0].categories[0].name : 'N/A';
+			pl.formattedPhone = res.response.venues[0].contact.formattedPhone ? res.response.venues[0].contact.formattedPhone : 'N/A';
+			pl.id = res.response.venues[0].id;
+			pl.title += res.response.venues[0].categories.length === 1 ? ` (${res.response.venues[0].categories[0].shortName})` : ` (no category from FourSquare)`;
+			
 			if(!res.response.venues[0]) {
 				pl.infoContent += `<div>FourSquare: No data from FourSquare</div>`;
 			} else {
@@ -261,10 +268,7 @@ function viewModel() {
 				} else {
 					pl.infoContent += `<div>FourSquare: category: ${pl.category}/ phone: ${pl.formattedPhone} <a href="#">No FourSquare Url</a></div>`;
 				}
-				pl.category = res.response.venues[0].categories.length === 1 ? res.response.venues[0].categories[0].name : 'N/A';
-				pl.formattedPhone = res.response.venues[0].contact.formattedPhone ? res.response.venues[0].contact.formattedPhone : 'N/A';
-				pl.id = res.response.venues[0].id;
-				pl.title += res.response.venues[0].categories.length === 1 ? ` (${res.response.venues[0].categories[0].shortName})` : ` (no category from FourSquare)`;
+	
 			}
 
 		};

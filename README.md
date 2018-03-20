@@ -40,3 +40,8 @@ https://discussions.udacity.com/t/how-to-remove-node-modules-directory-from-gith
 
 12. how to use Foursquare api
 https://foursquare.com/developers/apps
+
+13. 显示用户自身位置
+https://developers.google.cn/maps/documentation/javascript/geolocation?hl=zh-cn
+
+14. 

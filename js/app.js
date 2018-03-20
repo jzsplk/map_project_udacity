@@ -52,23 +52,23 @@ function populateInfoWindow(marker, infowindow) {
 // These are the real estate listings that will be shown to the user.
 // Normally we'd have these in a database instead.
 var locations = [
-  {title: '深圳 流塘阳光', location: {lat: 22.581396, lng: 113.889256}, Id: 0, type: 'house'},
-  {title: '深圳 中粮锦云', location: {lat: 22.584436, lng: 113.886998}, Id: 1, type: 'house'},
-  {title: '深圳 西城丰和家园', location: {lat: 22.585969597476446, lng: 113.87833871100531}, Id: 2, type: 'house'},
-  {title: '深圳 雍和园', location: {lat: 22.587446, lng: 113.886689}, Id: 3, type: 'house'},
-  {title: '深圳 泰华明珠', location: {lat: 22.581921, lng: 113.8829523}, Id: 4, type: 'house'},
-  {title: '深圳 金海华府', location: {lat: 22.582552, lng: 113.8928995}, Id: 5, type: 'coffee'},
-  {title: '深圳 中熙 香槟山花园', location: {lat: 22.594685, lng: 113.882703}, Id: 6, type: 'house'},
-  {title: '深圳 地铁12号线 流塘站', location: {lat: 22.583520, lng: 113.889244}, Id: 7, type: 'subway'},
-  {title: '深圳 地铁12号线 上川站', location: {lat: 22.575976, lng: 113.897464}, Id: 8, type: 'subway'},
-  {title: '深圳 地铁12号线 宝安客运中心站', location: {lat: 22.5902229, lng: 113.8835803}, Id: 9, type: 'subway'},
-  {title: '深圳 凤凰天誉', location: {lat: 22.595899, lng: 113.878355}, Id: 10, type: 'newhouse'},
-  {title: '龍景軒-香港 Lung King Heen', location: {lat: 22.286636, lng: 114.156623}, Id: 11, type: 'chinese'},
-  {title: '志魂-香港 Sushi Shikon', location: {lat: 22.285092, lng: 114.152089}, Id: 12, type: 'sushi'},
-  {title: '唐閣-香港 Tang Court', location: {lat: 22.296392, lng: 114.169746}, Id: 13, type: 'chinese'},
-  {title: '廚魔-香港-2 Bo Innovation', location: {lat: 22.276227, lng: 114.171086}, Id: 14, type: 'coffee'},
-  {title: '香港 LAtelier de Joël Robuchon', location: {lat: 22.2816084286963, lng: 114.157826442636}, Id: 15, type: 'french'},
-  {title: '香港 8 1/2 Otto e Mezzo BOMBANA', location: {lat: 22.281508, lng: 114.158365}, Id: 16, type: 'italian'},
+  {title: '深圳 流塘阳光', location: {lat: 22.581396, lng: 113.889256}, Id: 0, type: 'house', ypid : ''},
+  {title: '深圳 中粮锦云', location: {lat: 22.584436, lng: 113.886998}, Id: 1, type: 'house', ypid : ''},
+  {title: '深圳 西城丰和家园', location: {lat: 22.585969597476446, lng: 113.87833871100531}, Id: 2, type: 'house', ypid : ''},
+  {title: '深圳 雍和园', location: {lat: 22.587446, lng: 113.886689}, Id: 3, type: 'house', ypid : ''},
+  {title: '深圳 泰华明珠', location: {lat: 22.581921, lng: 113.8829523}, Id: 4, type: 'house', ypid : ''},
+  {title: '深圳 金海华府', location: {lat: 22.582552, lng: 113.8928995}, Id: 5, type: 'coffee', ypid : ''},
+  {title: '深圳 中熙 香槟山花园', location: {lat: 22.594685, lng: 113.882703}, Id: 6, type: 'house', ypid : ''},
+  {title: '深圳 地铁12号线 流塘站', location: {lat: 22.583520, lng: 113.889244}, Id: 7, type: 'subway', ypid : ''},
+  {title: '深圳 地铁12号线 上川站', location: {lat: 22.575976, lng: 113.897464}, Id: 8, type: 'subway', ypid : ''},
+  {title: '深圳 地铁12号线 宝安客运中心站', location: {lat: 22.5902229, lng: 113.8835803}, Id: 9, type: 'subway', ypid : ''},
+  {title: '深圳 凤凰天誉', location: {lat: 22.595899, lng: 113.878355}, Id: 10, type: 'newhouse', ypid : ''},
+  {title: '龍景軒-香港 Lung King Heen', location: {lat: 22.286636, lng: 114.156623}, Id: 11, type: 'chinese', ypid : '龍景軒-香港'},
+  {title: '志魂-香港 Sushi Shikon', location: {lat: 22.285092, lng: 114.152089}, Id: 12, type: 'sushi', ypid : '志魂-香港'},
+  {title: '唐閣-香港 Tang Court', location: {lat: 22.296392, lng: 114.169746}, Id: 13, type: 'chinese', ypid : '唐閣-香港'},
+  {title: '廚魔-香港-2 Bo Innovation', location: {lat: 22.276227, lng: 114.171086}, Id: 14, type: 'bar', ypid : '廚魔-香港-2'},
+  {title: '香港 LAtelier de Joël Robuchon', location: {lat: 22.2816084286963, lng: 114.157826442636}, Id: 15, type: 'french', ypid : 'l-atelier-de-joël-robuchon-香港-3'},
+  {title: '香港 8 1/2 Otto e Mezzo BOMBANA', location: {lat: 22.281508, lng: 114.158365}, Id: 16, type: 'italian', ypid : '8-1-2-otto-e-mezzo-bombana-香港'},
 ];
 
 //自定义icon for google map
@@ -97,7 +97,10 @@ var icons = {
   },
   sushi: {
     icon: iconBase + 'pal3/icon29.png'
-  },    
+  },
+  bar: {
+    icon: iconBase + 'pal2/icon19.png'
+  },      
 };
 
 //viewModel for the app
@@ -254,7 +257,7 @@ function viewModel() {
 				pl.infoContent += `<div>FourSquare: No data from FourSquare</div>`;
 			} else {
 				if(res.response.venues[0].url) {
-					pl.infoContent += `<div>FourSquare: category: ${pl.category}/ phone: ${pl.formattedPhone} <a href=${res.response.venues[0].url}>FourSquare</a> </div>`;
+					pl.infoContent += `<div>FourSquare: category: ${pl.category}/ phone: ${pl.formattedPhone} <a href=${res.response.venues[0].url}>FourSquare Url</a> </div>`;
 				} else {
 					pl.infoContent += `<div>FourSquare: category: ${pl.category}/ phone: ${pl.formattedPhone} <a href="#">No FourSquare Url</a></div>`;
 				}
@@ -270,7 +273,57 @@ function viewModel() {
 		fetch(requestURL).then(response => response.json()).then(pl.addFourSquareData).catch(function(e) {pl.infoContent+=`FourSquare Fetch error: ${e}`});
 
 		//yelp api data
+		var term = '';
+		pl.ypid = data.ypid;
+		var yelpUrl = 'https://cors-anywhere.herokuapp.com/' + 'https://api.yelp.com/v3/businesses/' + pl.ypid;
+		var myYelpSecret = '6omr7-7C49v8GwsXDe0DdzfHcN1b6A1B4QBVaxjQOQaz-QiWeeeymAor8vKvw9Xgl6ulBXmOS08yE76nVKfu1HXupzlYjX3bOhyvXwR5HRg4-b5VqGKNQogAZD2nWnYx';
+		var yelpInit = {       
+			"async": true,
+		  	"crossDomain": true,
+		    "method": "GET",
+		    "headers": {
+		    	"authorization": "Bearer " + myYelpSecret,
+		    	"cache-control": "no-cache" 
+			}
+		};
 
+		this.addYelpData = function(res) {
+			if(res.error) {
+				pl.infoContent += `<div>Yelp Content: ${res.error.description}</div>`;
+			} else {
+				console.log(res);
+				//用户自己的位置
+				var venue = "22.584436,113.886998";
+				pl.img = res.image_url;
+				pl.reviewCount = res.review_count;
+				pl.address = res.location.display_address[1];
+				pl.city = res.location.city;
+				pl.yelpUrl = res.url;
+				pl.phoneNum = res.display_phone;
+				pl.price = res.price;
+				pl.is_closed = res.is_closed;
+				pl.status = pl.is_closed ? '商家休息' : '营业中';
+				pl.infoContent += `<div id="yelpContent">
+									<h3 id="placeName">${res.name}</h3>
+									<img src=""></img>
+									<span>(${pl.reviewCount})</span>
+									<img id="yelp-img" src=${pl.img}>
+									<p class="phone"><a href="tel: +${pl.phoneNum}">联系 ${pl.phoneNum}</a></p>
+									<p class="address"><a href="https://www.google.com/maps/dir/${venue}/${pl.address}${pl.city}">导航到 ${pl.address}</a></p>
+									<p>价位：${pl.price} </p>
+									<p>营业状态： ${pl.status}<p>
+									<p class="description">Yelp 页面 <a href=${pl.yelpUrl}>传送门</a></p>
+								   </div>`;
+			}
+			
+		};
+
+		fetch(yelpUrl,yelpInit).then(function(response) {
+		  return response.json();
+		})
+		.then(pl.addYelpData).catch(function(e) {
+			pl.infoContent += `<div>Yelp Content ${e}</div>`;
+		});
 
 		//make a marker from the location
 		marker = new google.maps.Marker({
@@ -314,24 +367,24 @@ map.addEventListener('click', function() {
 
 
 //yelp search
-var term = "Lung King Heen ";
-var latitude = 22.3363232; 
-var longitude = 114.0153456;
-var myurl = 'https://cors-anywhere.herokuapp.com/' + 'https://api.yelp.com/v3/businesses/search?' + 'latitude=' + latitude + '&longitude=' + longitude + '&term=' + term;
-var myInit = {       
-	"async": true,
-  	"crossDomain": true,
-    "method": "GET",
-    "headers": {
-    	"authorization": "Bearer " + '6omr7-7C49v8GwsXDe0DdzfHcN1b6A1B4QBVaxjQOQaz-QiWeeeymAor8vKvw9Xgl6ulBXmOS08yE76nVKfu1HXupzlYjX3bOhyvXwR5HRg4-b5VqGKNQogAZD2nWnYx',
-    	"cache-control": "no-cache" 
-	}
-};
-fetch(myurl,myInit)
-.then(function(response) {
-  return response.json();
-})
-.then(function(res) {
-  console.log(res);
-});
+// var term = "Lung King Heen ";
+// var latitude = 22.3363232; 
+// var longitude = 114.0153456;
+// var myurl = 'https://cors-anywhere.herokuapp.com/' + 'https://api.yelp.com/v3/businesses/search?' + 'latitude=' + latitude + '&longitude=' + longitude + '&term=' + term;
+// var myInit = {       
+// 	"async": true,
+//   	"crossDomain": true,
+//     "method": "GET",
+//     "headers": {
+//     	"authorization": "Bearer " + '6omr7-7C49v8GwsXDe0DdzfHcN1b6A1B4QBVaxjQOQaz-QiWeeeymAor8vKvw9Xgl6ulBXmOS08yE76nVKfu1HXupzlYjX3bOhyvXwR5HRg4-b5VqGKNQogAZD2nWnYx',
+//     	"cache-control": "no-cache" 
+// 	}
+// };
+// fetch(myurl,myInit)
+// .then(function(response) {
+//   return response.json();
+// })
+// .then(function(res) {
+//   console.log(res);
+// });
 

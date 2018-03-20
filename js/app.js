@@ -5,6 +5,10 @@ var map;
 var markers = [];
 var largeInfowindow;
 
+//cors anywhere
+var corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';
+var yelpError = '<div id="yelp-content">The Yelp rating cannot be displayed right now.\nPlease try again later.</div>';
+
 //toogleBounce的功能,切换marker的动画效果
 function toggleBounce(id) {
 	for(var i = 0; i < markers.length; i++) {
@@ -42,7 +46,7 @@ function populateInfoWindow(marker, infowindow) {
       		infowindow.setMarker = null;
     	});
   	}
-}
+};
 
 
 // These are the real estate listings that will be shown to the user.
@@ -58,7 +62,13 @@ var locations = [
   {title: '地铁12号线 流塘站', location: {lat: 22.583520, lng: 113.889244}, Id: 7, type: 'subway'},
   {title: '地铁12号线 上川站', location: {lat: 22.575976, lng: 113.897464}, Id: 8, type: 'subway'},
   {title: '地铁12号线 宝安客运中心站', location: {lat: 22.5902229, lng: 113.8835803}, Id: 9, type: 'subway'},
-  {title: '凤凰天誉', location: {lat: 22.595899, lng: 113.878355}, Id: 10, type: 'newhouse'}
+  {title: '凤凰天誉', location: {lat: 22.595899, lng: 113.878355}, Id: 10, type: 'newhouse'},
+  {title: '龍景軒-香港 Lung King Heen', location: {lat: 22.286636, lng: 114.156623}, Id: 11, type: 'coffee'},
+  {title: '志魂-香港 Sushi Shikon', location: {lat: 22.285092, lng: 114.152089}, Id: 12, type: 'coffee'},
+  {title: '唐閣-香港 Tang Court', location: {lat: 22.296392, lng: 114.169746}, Id: 13, type: 'coffee'},
+  {title: '廚魔-香港-2 Bo Innovation', location: {lat: 22.276227, lng: 114.171086}, Id: 14, type: 'coffee'},
+  {title: '香港 LAtelier de Joël Robuchon', location: {lat: 22.2816084286963, lng: 114.157826442636}, Id: 15, type: 'coffee'},
+  {title: '香港 8 1/2 Otto e Mezzo BOMBANA', location: {lat: 22.281508, lng: 114.158365}, Id: 16, type: 'coffee'},
 ];
 
 //自定义icon for google map
@@ -218,6 +228,7 @@ function viewModel() {
 		this.infoContent = '';
 		this.id = '';
 
+		//Foursquare API 
 		var clientId = 'QRDYBWLOQAW5XYCNVKDCU2KVUYBK3KECVCOS5RGCQODZAHPI'; 
 		var clientSecret = 'EUOFJ3QL5T4T0Z1CEOOGDFPP21AD1VJRIWYTXCYDRD4RBMQV';
 
@@ -225,14 +236,18 @@ function viewModel() {
 		var requestURL = `https://api.foursquare.com/v2/venues/search?ll=${this.loc.lat},${this.loc.lng}&client_id=${clientId}&client_secret=${clientSecret}&v=20170801&query=${this.title}`;
 
 		//function to add api content to data
-		this.addData = function(res) {
+		this.addFourSquareData = function(res) {
 			console.log(res.response.venues[0]);
 			if(!res.response.venues[0]) {
 				pl.infoContent += `<div>FourSquare: No data from FourSquare</div>`;
 			} else {
+				if(res.response.venues[0].url) {
+					pl.infoContent += `<div>FourSquare: category: ${pl.category}/ phone: ${pl.formattedPhone} <a href=${res.response.venues[0].url}>FourSquare</a> </div>`;
+				} else {
+					pl.infoContent += `<div>FourSquare: category: ${pl.category}/ phone: ${pl.formattedPhone} <a href="#">No FourSquare Url</a></div>`;
+				}
 				pl.category = res.response.venues[0].categories.length === 1 ? res.response.venues[0].categories[0].name : 'N/A';
 				pl.formattedPhone = res.response.venues[0].contact.formattedPhone ? res.response.venues[0].contact.formattedPhone : 'N/A';
-				pl.infoContent += `<div>FourSquare: category: ${pl.category}/ phone: ${pl.formattedPhone}</div>`;
 				pl.id = res.response.venues[0].id;
 				pl.title += res.response.venues[0].categories.length === 1 ? ` (${res.response.venues[0].categories[0].shortName})` : ` (no category from FourSquare)`;
 			}
@@ -240,9 +255,11 @@ function viewModel() {
 		};
 
 		//fetch to get request to api
-		fetch(requestURL).then(response => response.json()).then(pl.addData).catch(function(e) {pl.infoContent+=`FourSquare Fetch error: ${e}`});
+		fetch(requestURL).then(response => response.json()).then(pl.addFourSquareData).catch(function(e) {pl.infoContent+=`FourSquare Fetch error: ${e}`});
 
-		
+		//yelp api data
+
+
 		//make a marker from the location
 		marker = new google.maps.Marker({
 	        position: pl.loc,
@@ -284,5 +301,25 @@ map.addEventListener('click', function() {
 
 
 
-
+//yelp search
+var term = "Lung King Heen ";
+var latitude = 22.3363232; 
+var longitude = 114.0153456;
+var myurl = 'https://cors-anywhere.herokuapp.com/' + 'https://api.yelp.com/v3/businesses/search?' + 'latitude=' + latitude + '&longitude=' + longitude + '&term=' + term;
+var myInit = {       
+	"async": true,
+  	"crossDomain": true,
+    "method": "GET",
+    "headers": {
+    	"authorization": "Bearer " + '6omr7-7C49v8GwsXDe0DdzfHcN1b6A1B4QBVaxjQOQaz-QiWeeeymAor8vKvw9Xgl6ulBXmOS08yE76nVKfu1HXupzlYjX3bOhyvXwR5HRg4-b5VqGKNQogAZD2nWnYx',
+    	"cache-control": "no-cache" 
+	}
+};
+fetch(myurl,myInit)
+.then(function(response) {
+  return response.json();
+})
+.then(function(res) {
+  console.log(res);
+});
 

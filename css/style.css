@@ -90,20 +90,33 @@ main {
     font-size: 14px;
 }
 
-#yeplContent p {
-  margin: 10px 10px 10px 10px;
-}
-
 #placeName {
     font-size: 20px;
     margin-bottom: 2px;
 }
+
 #yelp-img {
     float: left;
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 5px;
     width: 150px;
+}
+
+#contact {
+  margin-bottom: 10px;
+}
+
+#address {
+  margin-bottom: 10px;
+}
+
+#price {
+  margin-bottom: 10px;
+}
+
+#status {
+  margin-bottom: 10px;
 }
 
 /****** google map windows*******/

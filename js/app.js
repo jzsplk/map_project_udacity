@@ -302,18 +302,18 @@ function viewModel() {
 				pl.phoneNum = res.display_phone;
 				pl.price = res.price;
 				pl.rating = res.rating;
-				pl.is_closed = res.is_closed;
-				pl.status = pl.is_closed ? '商家休息' : '营业中';
+				pl.is_open_now = res.hours[0].is_open_now;
+				pl.status = pl.is_open_now ? '营业中' : '商家休息';
 				pl.infoContent += `<div id="yelpContent">
 									<h3 id="placeName">${res.name}</h3>
 									<img src="img/small_${pl.rating}.png"></img>
 									<span>(${pl.reviewCount})</span>
 									<img id="yelp-img" src=${pl.img}>
-									<p class="phone"><a href="tel: +${pl.phoneNum}">联系 ${pl.phoneNum}</a></p>
-									<p class="address"><a href="https://www.google.com/maps/dir/${venue}/${pl.address}${pl.city}">导航到 ${pl.address}</a></p>
-									<p>价位：${pl.price} </p>
-									<p>营业状态： ${pl.status}<p>
-									<p class="description">Yelp 页面 <a href=${pl.yelpUrl}>传送门</a></p>
+									<p id="contact" class="phone"><a href="tel: +${pl.phoneNum}">联系 ${pl.phoneNum}</a></p>
+									<p id="address" class="address"><a href="https://www.google.com/maps/dir/${venue}/${pl.address}${pl.city}">导航到 ${pl.address}</a></p>
+									<p id="price">价位：${pl.price} </p>
+									<p id="status">营业状态： ${pl.status}<p>
+									<p>Yelp 页面 <a href=${pl.yelpUrl}>传送门</a></p>
 								   </div>`;
 			}
 			

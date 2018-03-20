@@ -259,12 +259,12 @@ function viewModel() {
 			pl.formattedPhone = res.response.venues[0].contact.formattedPhone ? res.response.venues[0].contact.formattedPhone : 'N/A';
 			pl.id = res.response.venues[0].id;
 			pl.title += res.response.venues[0].categories.length === 1 ? ` (${res.response.venues[0].categories[0].shortName})` : ` (no category from FourSquare)`;
-			
+
 			if(!res.response.venues[0]) {
 				pl.infoContent += `<div>FourSquare: No data from FourSquare</div>`;
 			} else {
 				if(res.response.venues[0].url) {
-					pl.infoContent += `<div>FourSquare: category: ${pl.category}/ phone: ${pl.formattedPhone} <a href=${res.response.venues[0].url}>FourSquare Url</a> </div>`;
+					pl.infoContent += `<div>FourSquare Content: category: ${pl.category}/ phone: ${pl.formattedPhone} <a href=${res.response.venues[0].url}>${res.response.venues[0].url}</a> </div>`;
 				} else {
 					pl.infoContent += `<div>FourSquare: category: ${pl.category}/ phone: ${pl.formattedPhone} <a href="#">No FourSquare Url</a></div>`;
 				}

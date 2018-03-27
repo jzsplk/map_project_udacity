@@ -1,19 +1,16 @@
-前端纳米学位街区地区项目
-===============================
 
-学生应该用这个[评审标准](https://review.udacity.com/#!/rubrics/499/view))来自我检查自己提交的代码。 确认自己写的函数要是**面向对象的** -  要么是类函数（就像函数 Player 和 Enemy）要么是类的原型链上的函数比如 Enemy.prototype.checkCollisions ， 在类函数里面或者类的原型链函数里面适当的使用关键词 'this' 来引用调用该函数的对象实例。最后保证你的**readme.md**文件要写明关于如何运行和如何玩你的街机游戏的指引。
 
-关于如何开始这个项目的更详细的指导，可以查阅这份[指南](https://gdgdocs.org/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true)。
-
-Alex的前端纳米学位街机游戏克隆项目
+Alex的前端纳米学位街区地图（地铁找房·香港米其林餐厅地图）项目
 ====================
 ## Project Purpose
-This game was built as a Udacity Course project. The purpose of the project is to demonstrate mastery of HTML, CSS, and JavaScript.
+- 项目使用google map API， Yelp API， Foursquare API 
+- 在地图上记录了一条深圳即将开通地铁线路站点规划以及周边楼盘信息，使用FourSquare获取一些基本信息
+- 在地图香港一侧标记了香港三星米其林餐厅，并通过FourSquare可以访问其餐厅官网，利用Yelp可以获取餐厅图片，评分，价位，是否营业等信息，也可以直接拨打餐厅电话预定，已经获取到餐厅导航路线
 
 ## How to Load the game
 
 - Clone the **[repo](https://github.com/jzsplk/front-udacity-ArcadeGame.git)** and open index.html -- or --
-- Play on GitHub.io: **[xc's frogger game](https://jzsplk.github.io/map_project_udacity/)**
+- Play on GitHub.io: **[xc's Map App](https://jzsplk.github.io/map_project_udacity/)**
 
 ## Resources used to create the game:
 

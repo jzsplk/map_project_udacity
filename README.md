@@ -65,7 +65,7 @@ Alex的前端纳米学位街区地图（地铁找房·香港米其林餐厅地�
 #### Udacity Resources:
 
 - [Project Description](https://classroom.udacity.com/nanodegrees/nd001-cn-advanced/parts/b4672613-0d5a-4fb9-bb2d-571c92361fee/modules/4fd8d440-9428-4de7-93c0-4dca17a36700/lessons/2711658591239847/concepts/26294486380923)
-- [Project Rubric](https://classroom.udacity.com/nanodegrees/nd001-cn-advanced/parts/b4672613-0d5a-4fb9-bb2d-571c92361fee/modules/4fd8d440-9428-4de7-93c0-4dca17a36700/lessons/2711658591239847/concepts/26906985370923)
+- [Project Rubric](https://review.udacity.com/#!/rubrics/17/view)
 
 # map_project_udacity
 

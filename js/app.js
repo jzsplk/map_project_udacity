@@ -124,6 +124,18 @@ function viewModel() {
 	//搜索关键词
   	self.Query = ko.observable('');
 
+  	//控制menu的css
+  	self.menuIsOpen = ko.observable(false);
+
+  	//toggle menu显示的function
+  	self.menuToggle = function() {
+  		self.menuIsOpen(!self.menuIsOpen());
+  	};
+
+  	//关闭menu的function
+  	self.menuClose = function() {
+  		self.menuIsOpen(false);
+  	};
 	// console.log(self.searchResults());
 
 	//init map 初始化googlemap函数
@@ -353,21 +365,6 @@ var myViewModel = new viewModel();
 
 ko.applyBindings(myViewModel);
 
-//menu controll
-var menu = document.querySelector('#menu');
-var map = document.querySelector('.map');
-var drawer = document.querySelector('.filter');
-var search = document.querySelector('.form-control');
-
-menu.addEventListener('click', function(e) {
-	drawer.classList.toggle('open');
-	search.classList.toggle('open');
-	e.stopPropagation();
-});
-map.addEventListener('click', function() {
-	drawer.classList.remove('open');
-	search.classList.remove('open');
-});
 
 
 
